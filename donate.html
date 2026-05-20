@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate | Moses</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.donate-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 64px);
+}
+
+/* LEFT - hero panel */
+.donate-left {
+  background: var(--off-black);
+  padding: 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.donate-left::before {
+  content: '♥';
+  position: absolute;
+  bottom: -3rem; right: -2rem;
+  font-size: 22rem;
+  color: rgba(255,255,255,0.02);
+  pointer-events: none;
+  line-height: 1;
+}
+
+.donate-big {
+  font-family: var(--font-head);
+  font-size: clamp(3rem, 5vw, 5rem);
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.donate-sub {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  max-width: 340px;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.donate-who {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.who-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.who-text {}
+.who-name {
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.15rem;
+}
+.who-role {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+.heart-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.heart-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+}
+.heart-dot.active { background: var(--white); }
+
+/* RIGHT - payment cards */
+.donate-right {
+  padding: 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.donate-section-head {
+  margin-bottom: 0.5rem;
+}
+
+/* Amount selector */
+.amount-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.amount-chip {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  user-select: none;
+}
+
+.amount-chip:hover { border-color: rgba(255,255,255,0.3); }
+.amount-chip.selected { background: var(--white); color: var(--black); border-color: var(--white); }
+
+.amount-chip .chip-label {
+  font-size: 0.65rem;
+  color: inherit;
+  opacity: 0.6;
+  display: block;
+  margin-bottom: 0.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.custom-amount-wrap {
+  position: relative;
+}
+
+.currency-tag {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.custom-amount-input {
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.9rem 1rem 0.9rem 3.5rem;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.custom-amount-input::placeholder { color: rgba(255,255,255,0.2); }
+.custom-amount-input:focus { border-color: rgba(255,255,255,0.4); }
+
+/* Payment method tabs */
+.method-tabs {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.35rem;
+}
+
+.method-tab {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.method-tab:hover { color: var(--white); }
+.method-tab.active { background: var(--white); color: var(--black); }
+
+/* Method panels */
+.method-panel { display: none; }
+.method-panel.active { display: flex; flex-direction: column; gap: 1rem; }
+
+/* MoMo card */
+.momo-card {
+  background: linear-gradient(135deg, #1a1200, #2a1f00);
+  border: 1px solid rgba(255, 196, 0, 0.2);
+  border-radius: 16px;
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.momo-card::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: rgba(255,196,0,0.06);
+}
+
+.momo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255,196,0,0.15);
+  border: 1px solid rgba(255,196,0,0.3);
+  color: #ffc400;
+  font-size: 0.72rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 100px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.momo-title {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  letter-spacing: 0.05em;
+  color: #ffc400;
+  margin-bottom: 0.4rem;
+}
+
+.momo-desc {
+  font-size: 0.8rem;
+  color: rgba(255,196,0,0.6);
+  margin-bottom: 1.25rem;
+}
+
+.momo-number-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,196,0,0.08);
+  border: 1px solid rgba(255,196,0,0.15);
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+}
+
+.momo-number {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffc400;
+  letter-spacing: 0.08em;
+}
+
+.copy-btn {
+  background: rgba(255,196,0,0.15);
+  border: 1px solid rgba(255,196,0,0.25);
+  color: #ffc400;
+  border-radius: 7px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: var(--font-body);
+}
+
+.copy-btn:hover { background: rgba(255,196,0,0.25); }
+
+.momo-name {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: rgba(255,196,0,0.55);
+}
+.momo-name span { color: #ffc400; font-weight: 500; }
+
+.momo-steps {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255,196,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.momo-step {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: rgba(255,196,0,0.6);
+}
+
+.step-num {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: rgba(255,196,0,0.12);
+  border: 1px solid rgba(255,196,0,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #ffc400;
+  flex-shrink: 0;
+}
+
+/* Card payment */
+.card-panel-inner {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.card-field label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+
+.card-field input {
+  width: 100%;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem 0.9rem;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.card-field input::placeholder { color: rgba(255,255,255,0.2); }
+.card-field input:focus { border-color: rgba(255,255,255,0.4); }
+.card-field.full { grid-column: span 2; }
+
+.card-security-note {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+/* Donate button */
+.donate-btn {
+  width: 100%;
+  background: var(--white);
+  color: var(--black);
+  border: none;
+  border-radius: 100px;
+  padding: 1rem 2rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.donate-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+.donate-btn.success { background: #4ade80; }
+
+.donate-disclaimer {
+  text-align: center;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.2);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .donate-layout { grid-template-columns: 1fr; }
+  .donate-left { min-height: 360px; padding: 3rem 1.5rem; border-right: none; border-bottom: 1px solid var(--border); }
+  .donate-right { padding: 3rem 1.5rem; }
+  .donate-left::before { font-size: 14rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">MOSES</a>
+  <ul class="nav-links">
+    <li><a href="index.html"><span class="nav-icon">🏠</span> <span>Home</span></a></li>
+    <li><a href="about.html"><span class="nav-icon">ℹ️</span> <span>About</span></a></li>
+    <li><a href="skills.html"><span class="nav-icon">💪</span> <span>Skills</span></a></li>
+    <li><a href="services.html"><span class="nav-icon">🛠️</span> <span>Services</span></a></li>
+    <li><a href="contact.html" class="nav-contact"><span>Contacts</span></a></li>
+    <li><a href="donate.html"><span class="nav-icon">💝</span> <span>Donate</span></a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="donate-layout">
+
+    <!-- LEFT -->
+    <div class="donate-left">
+      <div class="donate-big fade-up">
+        Support<br>My Mom ♥
+      </div>
+      <p class="donate-sub fade-up" data-delay="100">
+        Every contribution, big or small, goes directly to supporting my mom. If my work has ever helped you, this is a way to give back. Thank you from the bottom of my heart.
+      </p>
+      <div class="donate-who fade-up" data-delay="180">
+        <div class="who-avatar">👩</div>
+        <div class="who-text">
+          <div class="who-name">MOM</div>
+          <div class="who-role">Receiving donations in RWF · Rwanda</div>
+        </div>
+      </div>
+      <div class="heart-row fade-up" data-delay="250">
+        <div class="heart-dot active"></div>
+        <div class="heart-dot active"></div>
+        <div class="heart-dot active"></div>
+        <div class="heart-dot"></div>
+        <div class="heart-dot"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="donate-right">
+
+      <!-- Amount -->
+      <div class="fade-up">
+        <span class="section-tag" style="margin-bottom:0.75rem; display:block;">Choose Amount (RWF)</span>
+        <div class="amount-grid" id="amountGrid">
+          <div class="amount-chip selected" data-val="1000">
+            <span class="chip-label">Small</span>1,000
+          </div>
+          <div class="amount-chip" data-val="5000">
+            <span class="chip-label">Medium</span>5,000
+          </div>
+          <div class="amount-chip" data-val="10000">
+            <span class="chip-label">Big</span>10,000
+          </div>
+          <div class="amount-chip" data-val="20000">
+            <span class="chip-label"></span>20,000
+          </div>
+          <div class="amount-chip" data-val="50000">
+            <span class="chip-label"></span>50,000
+          </div>
+          <div class="amount-chip" data-val="100000">
+            <span class="chip-label">🙏</span>100,000
+          </div>
+        </div>
+        <div class="custom-amount-wrap">
+          <span class="currency-tag">RWF</span>
+          <input type="number" class="custom-amount-input" id="customAmount" placeholder="Or enter custom amount">
+        </div>
+      </div>
+
+      <!-- Method tabs -->
+      <div class="fade-up" data-delay="100">
+        <span class="section-tag" style="margin-bottom:0.75rem; display:block;">Payment Method</span>
+        <div class="method-tabs">
+          <button class="method-tab active" data-tab="momo">📱 MTN MoMo</button>
+          <button class="method-tab" data-tab="card">💳 Card</button>
+        </div>
+      </div>
+
+      <!-- MoMo Panel -->
+      <div class="method-panel active fade-up" id="panel-momo" data-delay="160">
+        <div class="momo-card">
+          <div class="momo-badge">✦ MTN Mobile Money</div>
+          <div class="momo-title">Send to MoMo</div>
+          <div class="momo-desc">Use MTN MoMo to send directly to mom's number</div>
+          <div class="momo-number-row">
+            <div class="momo-number" id="momoNum">0728 619 365</div>
+            <button class="copy-btn" id="copyBtn">Copy</button>
+          </div>
+          <div class="momo-name">Account name: <span>Mom — Moses's Family</span></div>
+          <div class="momo-steps">
+            <div class="momo-step">
+              <div class="step-num">1</div>
+              Dial *182# on your MTN line
+            </div>
+            <div class="momo-step">
+              <div class="step-num">2</div>
+              Select "Transfer Money" → "To MoMo"
+            </div>
+            <div class="momo-step">
+              <div class="step-num">3</div>
+              Enter number <strong style="color:#ffc400;">0728619365</strong> and your amount in RWF
+            </div>
+            <div class="momo-step">
+              <div class="step-num">4</div>
+              Confirm with your MoMo PIN. Done! 🎉
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Panel -->
+      <div class="method-panel fade-up" id="panel-card" data-delay="160">
+        <div class="card-panel-inner">
+          <div class="card-field full">
+            <label>Cardholder Name</label>
+            <input type="text" placeholder="Full name on card" id="cardName">
+          </div>
+          <div class="card-field full">
+            <label>Card Number</label>
+            <input type="text" placeholder="0000 0000 0000 0000" maxlength="19" id="cardNum">
+          </div>
+          <div class="card-row">
+            <div class="card-field">
+              <label>Expiry</label>
+              <input type="text" placeholder="MM / YY" maxlength="7" id="cardExp">
+            </div>
+            <div class="card-field">
+              <label>CVV</label>
+              <input type="text" placeholder="•••" maxlength="4" id="cardCvv">
+            </div>
+          </div>
+          <div class="card-security-note">
+            🔒 Your card info is not stored. This form is for demo purposes.
+          </div>
+        </div>
+      </div>
+
+      <!-- Donate button -->
+      <div class="fade-up" data-delay="220">
+        <button class="donate-btn" id="donateBtn">
+          Donate <span id="btnAmount">1,000 RWF</span> ♥
+        </button>
+      </div>
+
+      <div class="donate-disclaimer fade-up" data-delay="280">
+        All donations go directly to mom. Thank you for your kindness and generosity. 🙏
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+  // Amount selection
+  let selectedAmount = 1000;
+
+  document.querySelectorAll('.amount-chip').forEach(chip => {
+    chip.addEventListener('click', function() {
+      document.querySelectorAll('.amount-chip').forEach(c => c.classList.remove('selected'));
+      this.classList.add('selected');
+      selectedAmount = parseInt(this.dataset.val);
+      document.getElementById('customAmount').value = '';
+      updateBtn();
+    });
+  });
+
+  document.getElementById('customAmount').addEventListener('input', function() {
+    if (this.value) {
+      document.querySelectorAll('.amount-chip').forEach(c => c.classList.remove('selected'));
+      selectedAmount = parseInt(this.value) || 0;
+      updateBtn();
+    }
+  });
+
+  function updateBtn() {
+    const formatted = selectedAmount.toLocaleString();
+    document.getElementById('btnAmount').textContent = formatted + ' RWF';
+  }
+
+  // Method tabs
+  document.querySelectorAll('.method-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.method-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.method-panel').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+      document.getElementById('panel-' + this.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Copy number
+  document.getElementById('copyBtn').addEventListener('click', function() {
+    navigator.clipboard.writeText('0728619365').then(() => {
+      this.textContent = 'Copied!';
+      setTimeout(() => { this.textContent = 'Copy'; }, 2000);
+    });
+  });
+
+  // Card number formatting
+  document.getElementById('cardNum').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'').slice(0,16);
+    this.value = v.match(/.{1,4}/g)?.join(' ') || v;
+  });
+
+  // Expiry formatting
+  document.getElementById('cardExp').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'').slice(0,4);
+    if (v.length >= 3) v = v.slice(0,2) + ' / ' + v.slice(2);
+    this.value = v;
+  });
+
+  // Donate button
+  document.getElementById('donateBtn').addEventListener('click', function() {
+    const activeTab = document.querySelector('.method-tab.active').dataset.tab;
+    if (selectedAmount <= 0) {
+      alert('Please select or enter a donation amount.');
+      return;
+    }
+    if (activeTab === 'card') {
+      const name = document.getElementById('cardName').value.trim();
+      const num  = document.getElementById('cardNum').value.trim();
+      const exp  = document.getElementById('cardExp').value.trim();
+      const cvv  = document.getElementById('cardCvv').value.trim();
+      if (!name || !num || !exp || !cvv) {
+        alert('Please fill in all card details.');
+        return;
+      }
+    }
+
+    this.classList.add('success');
+    this.textContent = '✓ Thank you so much! 🙏';
+    setTimeout(() => {
+      this.classList.remove('success');
+      updateBtn();
+    }, 4000);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #000000;
+  --off-black: #0d0d0d;
+  --card-bg: #111111;
+  --card2: #1a1a1a;
+  --white: #ffffff;
+  --off-white: #f0f0f0;
+  --muted: #888888;
+  --border: rgba(255,255,255,0.1);
+  --accent: #ffffff;
+  --font-head: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  height: 64px;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.nav-links li a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: var(--white);
+  background: rgba(255,255,255,0.07);
+}
+
+.nav-links li a .nav-icon {
+  display: none;
+}
+
+.nav-contact {
+  background: var(--white);
+  color: var(--black) !important;
+  padding: 0.5rem 1.2rem !important;
+  border-radius: 100px !important;
+  font-weight: 500 !important;
+  transition: opacity 0.2s !important;
+}
+.nav-contact:hover {
+  background: var(--white) !important;
+  opacity: 0.82;
+  color: var(--black) !important;
+}
+
+/* ── PAGE WRAPPER ── */
+.page {
+  padding-top: 64px;
+  min-height: 100vh;
+}
+
+/* ── SHARED SECTION ── */
+.section-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.section-title {
+  font-family: var(--font-head);
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  letter-spacing: 0.04em;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.white-line {
+  width: 40px;
+  height: 3px;
+  background: var(--white);
+  margin-bottom: 2rem;
+}
+
+/* ── BUTTONS ── */
+.btn-white {
+  background: var(--white);
+  color: var(--black);
+  padding: 0.85rem 2.2rem;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: opacity 0.2s, transform 0.15s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-white:hover { opacity: 0.85; transform: translateY(-2px); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  padding: 0.85rem 2.2rem;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.3);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: border-color 0.2s, transform 0.15s;
+  cursor: pointer;
+}
+
+.btn-outline:hover { border-color: var(--white); transform: translateY(-2px); }
+
+/* ── CARDS ── */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.card:hover { border-color: rgba(255,255,255,0.25); transform: translateY(-3px); }
+
+/* ── FADE ANIMATION ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 1.2rem; }
+  .nav-links { gap: 0; }
+  .nav-links li a span:not(.nav-icon) { display: none; }
+  .nav-links li a { padding: 0.45rem 0.6rem; }
+}

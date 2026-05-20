@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills | Moses</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.skills-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 64px);
+}
+
+/* LEFT - chart side */
+.skills-left {
+  padding: 5rem 4rem;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.skills-chart-title {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 2.5rem;
+  color: var(--white);
+}
+
+.skill-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.skill-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  width: 110px;
+  flex-shrink: 0;
+  text-align: right;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.skill-track {
+  flex: 1;
+  height: 10px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 100%;
+  background: var(--white);
+  border-radius: 5px;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.1s cubic-bezier(0.4,0,0.2,1);
+}
+
+.skill-pct {
+  font-size: 0.78rem;
+  color: var(--muted);
+  width: 32px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.axis-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.axis-spacer { width: 110px; flex-shrink: 0; }
+.axis-labels {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+.axis-end { width: 32px; }
+
+/* RIGHT - tech icons + tools */
+.skills-right {
+  padding: 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  justify-content: center;
+}
+
+.tools-section-title {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 1.25rem;
+  color: var(--muted);
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+}
+
+.tool-chip {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 400;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  cursor: default;
+}
+
+.tool-chip:hover {
+  border-color: rgba(255,255,255,0.3);
+  color: var(--white);
+  transform: translateY(-3px);
+}
+
+.tool-chip .tc-icon { font-size: 1.6rem; }
+
+.currently-tag {
+  background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.2);
+  color: #4ade80;
+  font-size: 0.72rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 100px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  width: fit-content;
+}
+
+@media (max-width: 768px) {
+  .skills-layout { grid-template-columns: 1fr; }
+  .skills-left { padding: 3rem 1.5rem; border-right: none; border-bottom: 1px solid var(--border); }
+  .skills-right { padding: 3rem 1.5rem; }
+  .skill-label { width: 80px; font-size: 0.72rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">MOSES</a>
+  <ul class="nav-links">
+    <li><a href="index.html"><span class="nav-icon">🏠</span> <span>Home</span></a></li>
+    <li><a href="about.html"><span class="nav-icon">ℹ️</span> <span>About</span></a></li>
+    <li><a href="skills.html"><span class="nav-icon">💪</span> <span>Skills</span></a></li>
+    <li><a href="services.html"><span class="nav-icon">🛠️</span> <span>Services</span></a></li>
+    <li><a href="contact.html" class="nav-contact"><span>Contacts</span></a></li>
+    <li><a href="donate.html"><span class="nav-icon">💝</span> <span>Donate</span></a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="skills-layout">
+
+    <!-- LEFT - bar chart -->
+    <div class="skills-left">
+      <div class="skills-chart-title fade-up">My skill ratings</div>
+
+      <div class="skill-row fade-up" data-delay="80">
+        <div class="skill-label">Problem Solving</div>
+        <div class="skill-track"><div class="skill-fill" data-width="0.95"></div></div>
+        <div class="skill-pct">95</div>
+      </div>
+      <div class="skill-row fade-up" data-delay="130">
+        <div class="skill-label">Communication</div>
+        <div class="skill-track"><div class="skill-fill" data-width="0.92"></div></div>
+        <div class="skill-pct">92</div>
+      </div>
+      <div class="skill-row fade-up" data-delay="180">
+        <div class="skill-label">Figma</div>
+        <div class="skill-track"><div class="skill-fill" data-width="0.88"></div></div>
+        <div class="skill-pct">88</div>
+      </div>
+      <div class="skill-row fade-up" data-delay="230">
+        <div class="skill-label">HTML</div>
+        <div class="skill-track"><div class="skill-fill" data-width="0.90"></div></div>
+        <div class="skill-pct">90</div>
+      </div>
+      <div class="skill-row fade-up" data-delay="280">
+        <div class="skill-label">CSS</div>
+        <div class="skill-track"><div class="skill-fill" data-width="0.85"></div></div>
+        <div class="skill-pct">85</div>
+      </div>
+      <div class="skill-row fade-up" data-delay="330">
+        <div class="skill-label">JavaScript</div>
+        <div class="skill-track"><div class="skill-fill" data-width="0.80"></div></div>
+        <div class="skill-pct">80</div>
+      </div>
+
+      <div class="axis-row fade-up" data-delay="400">
+        <div class="axis-spacer"></div>
+        <div class="axis-labels">
+          <span>0</span><span>25</span><span>50</span><span>75</span><span>100</span>
+        </div>
+        <div class="axis-end"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT - tools -->
+    <div class="skills-right">
+      <div>
+        <div class="tools-section-title fade-up">Design Tools</div>
+        <div class="tools-grid">
+          <div class="tool-chip fade-up" data-delay="80"><div class="tc-icon">🎨</div>Figma</div>
+          <div class="tool-chip fade-up" data-delay="120"><div class="tc-icon">✏️</div>Canva</div>
+          <div class="tool-chip fade-up" data-delay="160"><div class="tc-icon">🖼️</div>Photoshop</div>
+          <div class="tool-chip fade-up" data-delay="200"><div class="tc-icon">📐</div>Wireframing</div>
+        </div>
+      </div>
+      <div>
+        <div class="tools-section-title fade-up">Dev Tools</div>
+        <div class="tools-grid">
+          <div class="tool-chip fade-up" data-delay="80"><div class="tc-icon">🌐</div>HTML5</div>
+          <div class="tool-chip fade-up" data-delay="110"><div class="tc-icon">🎨</div>CSS3</div>
+          <div class="tool-chip fade-up" data-delay="140"><div class="tc-icon">⚡</div>JavaScript</div>
+          <div class="tool-chip fade-up" data-delay="170"><div class="tc-icon">⚛️</div>React</div>
+          <div class="tool-chip fade-up" data-delay="200"><div class="tc-icon">🐙</div>GitHub</div>
+          <div class="tool-chip fade-up" data-delay="230"><div class="tc-icon">💻</div>VS Code</div>
+        </div>
+      </div>
+      <div class="fade-up" data-delay="300">
+        <div class="currently-tag">🟢 Currently learning React &amp; Node.js</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

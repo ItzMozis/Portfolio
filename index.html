@@ -1,98 +1,355 @@
 <!DOCTYPE html>
-    <html>
-        <head>
-            <title>
-                Mucyo Shami Moses
-            </title>
-            <style>
-                body{
-                    background: #f5f5f5;
-                }
-                .home {
-                    padding: 60px;
-                    display: flex;
-                    justify-content: space-between;
-                     align-items: center;
-                }
-                .home {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                }
-                .intro-box {
-                    width: 420px;
-                    padding: 30px 35px;
-                    border: 3px solid #000000; 
-                    border-radius: 100px; 
-                    background-color: #ebebeb;
-                }
-                .container div {
-                    display: flex;
-                     justify-content: space-between;
-                } 
-                .home img {
-                    width: 180px;
-                    border-radius: 20px;
-                }
-                div{
-                    display:inline;
-                }
-                .image-box {
-                    width: 180px;
-                    border-radius: 20px;
-                }
-                .buttons button {
-                    margin-top: 15px;
-                    margin-right: 10px;
-                    padding: 10px 20px;
-                    border-radius: 20px;
-                    border: none;
-                    background: black;
-                    color: white;
-                    cursor: pointer;
-                }
-               
-            </style>
-        </head>
-        <body style="background-color: #FFFFFF;">
-            
-            <center>
-            <div >
-                <div><img src="assets/home.png" width="15" height="15"></div>
-                <div>Home</div>&nbsp&nbsp&nbsp&nbsp&nbsp
-            </div>
-            <div>
-                <div><img src="assets/about.png" width="15" height="15"></div>
-                <div>About</div>&nbsp&nbsp&nbsp&nbsp&nbsp
-            </div>
-            <div>
-                <div><img src="assets/skills.png" width="15" height="15"></div>
-                <div>Skills</div>&nbsp&nbsp&nbsp&nbsp&nbsp
-            </div>
-            <div>
-                <div><img src="assets/services.png" width="15" height="15"></div>
-                <div>Services</div>&nbsp&nbsp&nbsp&nbsp&nbsp
-            </div>
-            <div>
-                <div><img src="assets/phonecall.png" width="15" height="15"></div>
-                <div>Contacts</div>&nbsp&nbsp&nbsp&nbsp&nbsp
-            </div>
-            </center>
-        <section class="home">
-            <div class="intro-box">
-                 <p class="hey">Hey,</p>
-                   <h2>I'm Moses,</h2>
-                   <p class="desc">and I’m a Website Developer and UI/UX Designer —
-                        creating bold & modern interfaces designs for companies all over the world
-                  </p>
-            </div>
-            <div class="buttons">
-                    <button class="btn">Hire Now!</button>
-                    <button class="btn">Talk Now!</button>
-            </div>
-            <div class="image-box">
-                <img src="assets/me.png">
-            </div>
-        </section>
-        </body>
-    </html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moses | Web Developer & UI/UX Designer</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ── HOME PAGE SPECIFIC ── */
+.home-wrap {
+  min-height: calc(100vh - 64px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+/* LEFT SIDE */
+.home-left {
+  padding: 5rem 4rem 4rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+
+.home-left::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 4rem; right: 4rem;
+  height: 1px;
+  background: var(--border);
+}
+
+.greeting-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  width: fit-content;
+}
+
+.greeting-dot {
+  width: 7px; height: 7px;
+  background: #4ade80;
+  border-radius: 50%;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity:1; } 50% { opacity:0.3; }
+}
+
+.home-headline {
+  font-family: var(--font-head);
+  font-size: clamp(3.2rem, 6vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+
+.home-headline .hi { color: var(--white); }
+.home-headline .im { color: var(--muted); }
+.home-headline .name { 
+  color: var(--white);
+  display: block;
+  font-size: clamp(3.8rem, 7vw, 6.5rem);
+}
+
+.home-role {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.home-role::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--muted);
+}
+
+.home-desc {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.8;
+  max-width: 380px;
+  margin-bottom: 2.5rem;
+}
+
+.home-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.home-socials {
+  margin-top: auto;
+  padding-top: 3rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.home-socials a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.2s;
+}
+
+.home-socials a:hover { color: var(--white); }
+
+/* RIGHT SIDE - photo */
+.home-right {
+  background: var(--off-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  gap: 2rem;
+}
+
+.home-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.03) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.03) 40px);
+}
+
+.photo-frame {
+  position: relative;
+  z-index: 1;
+  width: 280px;
+  height: 340px;
+  border-radius: 20px;
+  border: 2px solid rgba(255,255,255,0.15);
+  overflow: hidden;
+  background: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.photo-frame:hover { border-color: rgba(255,255,255,0.5); }
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--muted);
+}
+
+.photo-placeholder .ph-icon { font-size: 2.5rem; }
+.photo-placeholder .ph-text { font-size: 0.8rem; text-align: center; line-height: 1.5; }
+.photo-placeholder .ph-hint { font-size: 0.7rem; color: rgba(255,255,255,0.25); }
+
+#photoInput { display: none; }
+
+.photo-badge {
+  position: absolute;
+  bottom: -1px; left: 50%; transform: translateX(-50%);
+  background: var(--black);
+  border: 1px solid var(--border);
+  border-radius: 8px 8px 0 0;
+  padding: 0.4rem 1rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.stats-row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 1px;
+  background: var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  width: 280px;
+}
+
+.stat-box {
+  flex: 1;
+  background: rgba(0,0,0,0.8);
+  padding: 1rem 0.5rem;
+  text-align: center;
+}
+
+.stat-n {
+  font-family: var(--font-head);
+  font-size: 1.8rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+
+.stat-l {
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 768px) {
+  .home-wrap { grid-template-columns: 1fr; }
+  .home-left { padding: 3rem 1.5rem 2rem; border-right: none; }
+  .home-left::after { display: none; }
+  .home-right { min-height: 420px; padding: 3rem 1.5rem; }
+  .home-headline .name { font-size: clamp(3rem, 15vw, 5rem); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">MOSES</a>
+  <ul class="nav-links">
+    <li><a href="index.html"><span class="nav-icon">🏠</span> <span>Home</span></a></li>
+    <li><a href="about.html"><span class="nav-icon">ℹ️</span> <span>About</span></a></li>
+    <li><a href="skills.html"><span class="nav-icon">💪</span> <span>Skills</span></a></li>
+    <li><a href="services.html"><span class="nav-icon">🛠️</span> <span>Services</span></a></li>
+    <li><a href="contact.html" class="nav-contact"><span>Contacts</span></a></li>
+    <li><a href="donate.html"><span class="nav-icon">💝</span> <span>Donate</span></a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="home-wrap">
+
+    <!-- LEFT -->
+    <div class="home-left">
+      <div class="greeting-pill fade-up">
+        <div class="greeting-dot"></div>
+        Available for work
+      </div>
+
+      <h1 class="home-headline fade-up" data-delay="100">
+        <span class="hi">Hey,</span><br>
+        <span class="im">I'm </span><span class="name">MOSES,</span>
+      </h1>
+
+      <div class="home-role fade-up" data-delay="180">
+        Website Developer &amp; UI/UX Designer
+      </div>
+
+      <p class="home-desc fade-up" data-delay="240">
+        Creating bold &amp; brave interfaces and designs for companies all over the world.
+      </p>
+
+      <div class="home-btns fade-up" data-delay="300">
+        <a href="contact.html" class="btn-white">Hire Now!</a>
+        <a href="about.html" class="btn-outline">Talk Now!</a>
+      </div>
+
+      <div class="home-socials fade-up" data-delay="380">
+        <a href="https://instagram.com/ms_.moses" target="_blank">
+          📸 ms_.moses
+        </a>
+        <a href="mailto:mmoshami22@gmail.com">
+          ✉️ mmoshami22@gmail.com
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT - Photo -->
+    <div class="home-right">
+      <div class="photo-frame fade-up" data-delay="200" onclick="document.getElementById('photoInput').click()" title="Click to upload your photo">
+        <img id="profilePhoto" src="" alt="Moses" style="display:none;">
+        <div class="photo-placeholder" id="photoPlaceholder">
+          <div class="ph-icon">📷</div>
+          <div class="ph-text">Click to add<br>your photo</div>
+          <div class="ph-hint">JPG, PNG, WEBP</div>
+        </div>
+        <div class="photo-badge">Moses M.</div>
+      </div>
+      <input type="file" id="photoInput" accept="image/*">
+
+      <div class="stats-row fade-up" data-delay="350">
+        <div class="stat-box">
+          <div class="stat-n">2+</div>
+          <div class="stat-l">Years</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-n">15+</div>
+          <div class="stat-l">Projects</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-n">10+</div>
+          <div class="stat-l">Clients</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+  // Photo upload
+  document.getElementById('photoInput').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const img = document.getElementById('profilePhoto');
+      img.src = ev.target.result;
+      img.style.display = 'block';
+      document.getElementById('photoPlaceholder').style.display = 'none';
+      localStorage.setItem('mosesPhoto', ev.target.result);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Restore saved photo
+  const saved = localStorage.getItem('mosesPhoto');
+  if (saved) {
+    const img = document.getElementById('profilePhoto');
+    img.src = saved;
+    img.style.display = 'block';
+    document.getElementById('photoPlaceholder').style.display = 'none';
+  }
+</script>
+</body>
+</html>

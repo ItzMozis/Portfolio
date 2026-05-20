@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Moses</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 64px);
+}
+
+/* LEFT - dark photo side */
+.about-left {
+  background: var(--off-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 3rem;
+  border-right: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  gap: 2rem;
+}
+
+.about-left::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.025) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.025) 40px);
+}
+
+.about-photo-wrap {
+  position: relative;
+  z-index: 1;
+  width: 260px;
+  height: 320px;
+  border-radius: 18px;
+  border: 2px solid rgba(255,255,255,0.12);
+  overflow: hidden;
+  background: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.about-photo-wrap:hover { border-color: rgba(255,255,255,0.4); }
+.about-photo-wrap img { width:100%; height:100%; object-fit:cover; display:block; }
+
+.photo-placeholder-sm {
+  width:100%; height:100%;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:0.5rem; color:var(--muted);
+}
+.photo-placeholder-sm .ph-icon { font-size:2rem; }
+.photo-placeholder-sm .ph-text { font-size:0.75rem; text-align:center; }
+
+.about-name-tag {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.about-name-tag h2 {
+  font-family: var(--font-head);
+  font-size: 2.2rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+}
+
+.about-name-tag p {
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.about-contact-pills {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 260px;
+}
+
+.contact-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.contact-pill:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); }
+.contact-pill .cp-icon { font-size: 1rem; flex-shrink: 0; }
+
+/* RIGHT - content */
+.about-right {
+  padding: 5rem 4rem;
+  overflow-y: auto;
+}
+
+.about-section-head {
+  margin-bottom: 3rem;
+}
+
+.about-me-title {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.details-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.details-label {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 1rem;
+  color: var(--white);
+  border-left: 3px solid var(--white);
+  padding-left: 0.75rem;
+}
+
+.details-text {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.85;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.info-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  transition: border-color 0.2s;
+}
+
+.info-item:hover { border-color: rgba(255,255,255,0.25); }
+
+.info-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.35rem;
+}
+
+.info-val {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.about-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .about-layout { grid-template-columns: 1fr; }
+  .about-left { min-height: 500px; padding: 3rem 1.5rem; border-right: none; border-bottom: 1px solid var(--border); }
+  .about-right { padding: 3rem 1.5rem; }
+  .info-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">MOSES</a>
+  <ul class="nav-links">
+    <li><a href="index.html"><span class="nav-icon">🏠</span> <span>Home</span></a></li>
+    <li><a href="about.html"><span class="nav-icon">ℹ️</span> <span>About</span></a></li>
+    <li><a href="skills.html"><span class="nav-icon">💪</span> <span>Skills</span></a></li>
+    <li><a href="services.html"><span class="nav-icon">🛠️</span> <span>Services</span></a></li>
+    <li><a href="contact.html" class="nav-contact"><span>Contacts</span></a></li>
+    <li><a href="donate.html"><span class="nav-icon">💝</span> <span>Donate</span></a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="about-layout">
+
+    <!-- LEFT -->
+    <div class="about-left">
+      <div class="about-photo-wrap" onclick="document.getElementById('aboutPhotoInput').click()" title="Click to upload photo">
+        <img id="aboutPhoto" src="" alt="Moses" style="display:none;">
+        <div class="photo-placeholder-sm" id="aboutPlaceholder">
+          <div class="ph-icon">📷</div>
+          <div class="ph-text">Click to add photo</div>
+        </div>
+      </div>
+      <input type="file" id="aboutPhotoInput" accept="image/*" style="display:none;">
+
+      <div class="about-name-tag">
+        <h2>MOSES M.</h2>
+        <p>Web Dev · UI/UX Designer</p>
+      </div>
+
+      <div class="about-contact-pills">
+        <a href="https://instagram.com/ms_.moses" target="_blank" class="contact-pill">
+          <span class="cp-icon">📸</span> ms_.moses
+        </a>
+        <a href="tel:0728619365" class="contact-pill">
+          <span class="cp-icon">📞</span> 0728619365
+        </a>
+        <a href="mailto:mmoshami22@gmail.com" class="contact-pill">
+          <span class="cp-icon">✉️</span> mmoshami22@gmail.com
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="about-right">
+      <div class="about-section-head fade-up">
+        <span class="section-tag">Who I Am</span>
+        <div class="about-me-title">About Me:</div>
+        <div class="white-line"></div>
+      </div>
+
+      <div class="details-box fade-up" data-delay="100">
+        <div class="details-label">Details:</div>
+        <p class="details-text">
+          I'm a passionate web developer and UI/UX designer who enjoys building clean, user-friendly digital experiences. I focus on creating responsive and visually appealing websites that work smoothly across all devices.
+        </p>
+      </div>
+
+      <div class="details-box fade-up" data-delay="180">
+        <div class="details-label">My Approach:</div>
+        <p class="details-text">
+          I believe great design and solid code go hand in hand. Every project I take on is an opportunity to bridge creativity and engineering — building digital products that don't just look great, but feel intuitive and perform flawlessly.
+        </p>
+      </div>
+
+      <div class="info-grid fade-up" data-delay="260">
+        <div class="info-item">
+          <div class="info-label">Location</div>
+          <div class="info-val">🌍 Africa</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Experience</div>
+          <div class="info-val">2+ Years</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Availability</div>
+          <div class="info-val">🟢 Open to Work</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Focus</div>
+          <div class="info-val">Web & UI/UX</div>
+        </div>
+      </div>
+
+      <div class="about-actions fade-up" data-delay="330">
+        <a href="contact.html" class="btn-white">Hire Me →</a>
+        <a href="skills.html" class="btn-outline">See My Skills</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+  document.getElementById('aboutPhotoInput').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const img = document.getElementById('aboutPhoto');
+      img.src = ev.target.result;
+      img.style.display = 'block';
+      document.getElementById('aboutPlaceholder').style.display = 'none';
+      localStorage.setItem('mosesPhoto', ev.target.result);
+    };
+    reader.readAsDataURL(file);
+  });
+  const saved = localStorage.getItem('mosesPhoto');
+  if (saved) {
+    const img = document.getElementById('aboutPhoto');
+    img.src = saved;
+    img.style.display = 'block';
+    document.getElementById('aboutPlaceholder').style.display = 'none';
+  }
+</script>
+</body>
+</html>

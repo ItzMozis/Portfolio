@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Moses</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.services-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 64px);
+}
+
+/* LEFT - header panel */
+.services-left {
+  background: var(--off-black);
+  padding: 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.services-left::before {
+  content: 'SERVICES';
+  position: absolute;
+  bottom: -1rem;
+  left: -0.5rem;
+  font-family: var(--font-head);
+  font-size: 11rem;
+  color: rgba(255,255,255,0.03);
+  letter-spacing: -0.02em;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.services-big-title {
+  font-family: var(--font-head);
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+
+.services-blurb {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  max-width: 340px;
+  margin-bottom: 2.5rem;
+}
+
+.services-cta-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  margin-top: auto;
+}
+
+/* RIGHT - service cards */
+.services-right {
+  padding: 5rem 4rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  justify-content: center;
+}
+
+.service-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  transition: border-color 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--white);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s;
+}
+
+.service-card:hover { border-color: rgba(255,255,255,0.3); transform: translateX(4px); }
+.service-card:hover::before { transform: scaleY(1); }
+
+.service-num {
+  font-family: var(--font-head);
+  font-size: 2.5rem;
+  color: rgba(255,255,255,0.1);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  min-width: 52px;
+  text-align: right;
+}
+
+.service-content {}
+
+.service-title {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6rem;
+}
+
+.service-desc {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.75;
+}
+
+@media (max-width: 768px) {
+  .services-layout { grid-template-columns: 1fr; }
+  .services-left { min-height: 320px; padding: 3rem 1.5rem; border-right: none; border-bottom: 1px solid var(--border); }
+  .services-right { padding: 3rem 1.5rem; justify-content: flex-start; }
+  .services-big-title { font-size: 3rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">MOSES</a>
+  <ul class="nav-links">
+    <li><a href="index.html"><span class="nav-icon">🏠</span> <span>Home</span></a></li>
+    <li><a href="about.html"><span class="nav-icon">ℹ️</span> <span>About</span></a></li>
+    <li><a href="skills.html"><span class="nav-icon">💪</span> <span>Skills</span></a></li>
+    <li><a href="services.html"><span class="nav-icon">🛠️</span> <span>Services</span></a></li>
+    <li><a href="contact.html" class="nav-contact"><span>Contacts</span></a></li>
+    <li><a href="donate.html"><span class="nav-icon">💝</span> <span>Donate</span></a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="services-layout">
+
+    <!-- LEFT -->
+    <div class="services-left">
+      <span class="section-tag fade-up">What I Offer</span>
+      <div class="services-big-title fade-up" data-delay="80">
+        Services:
+      </div>
+      <p class="services-blurb fade-up" data-delay="160">
+        From pixel-perfect designs to production-ready code — I cover the full spectrum of web creation.
+      </p>
+      <a href="contact.html" class="btn-white fade-up" data-delay="240" style="width:fit-content;">Start a Project →</a>
+      <div class="services-cta-note fade-up" data-delay="310">
+        Have a project in mind?<br>Let's build something great together.
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="services-right">
+
+      <div class="service-card fade-up">
+        <div class="service-num">01</div>
+        <div class="service-content">
+          <div class="service-title">Web Development</div>
+          <p class="service-desc">I build responsive and modern websites that work on all devices — clean, fast, and built to last.</p>
+        </div>
+      </div>
+
+      <div class="service-card fade-up" data-delay="100">
+        <div class="service-num">02</div>
+        <div class="service-content">
+          <div class="service-title">UI/UX Design</div>
+          <p class="service-desc">I design user-friendly interfaces that improve user experience and engagement — from wireframes to high-fidelity prototypes.</p>
+        </div>
+      </div>
+
+      <div class="service-card fade-up" data-delay="180">
+        <div class="service-num">03</div>
+        <div class="service-content">
+          <div class="service-title">Website Redesign</div>
+          <p class="service-desc">I improve existing websites to make them look modern and perform better — better speed, better UX, better conversions.</p>
+        </div>
+      </div>
+
+      <div class="service-card fade-up" data-delay="260">
+        <div class="service-num">04</div>
+        <div class="service-content">
+          <div class="service-title">Maintenance &amp; Support</div>
+          <p class="service-desc">I help keep your website updated, secure, and running smoothly so you can focus on your business.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
